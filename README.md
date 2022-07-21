@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Note:
+
+This project uses environment variables. To run correctly, create a .env file in the root directory, and assign the following variables:
+
+```
+REACT_APP_GITHUB_URL="https://api.github.com"
+REACT_APP_GITHUB_TOKEN={your token here}
+```
+
+Adding a token to request url is optional, but allows for greater number of requests per minute (from 10/minute to 30/minute). Have a look at the [Github API docs](https://docs.github.com/en/rest/overview/resources-in-the-rest-api) for more clarity.
+
 ## Available Scripts
 
 In the project directory, you can run:
