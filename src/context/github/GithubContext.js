@@ -36,18 +36,19 @@ export const GithubProvider = ({ children }) => {
   };
 
   //get single user
-  const getUser = async (username) => {
+  const getUser = async (login) => {
     try {
       setLoading();
+      dispatch({ type: 'CLEAR_SINGLE_USER' });
 
-      const res = await fetch(`${GITHUB_URL}/users/${username}`, {
+      const res = await fetch(`${GITHUB_URL}/users/${login}`, {
         headers: {
           Authorization: `token ${GITHUB_TOKEN}`,
         },
       });
 
       if (res.status === 404) {
-        throw new Error('User not found poo');
+        throw new Error('User not found - check to see if username is correct');
       }
 
       const data = await res.json();
