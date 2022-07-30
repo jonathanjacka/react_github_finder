@@ -4,13 +4,15 @@ import GithubContext from '../context/github/GithubContext';
 
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
 
+import { getUser, getUserRepos } from '../context/github/GithubActions';
+
 import RepoList from '../components/repos/RepoList';
 import Spinner from '../components/layout/Spinner';
 import NotFound from './NotFound';
 
 function User() {
 
-    const { loading, getUser, user, notFound, getUserRepos, repos } = useContext(GithubContext);
+    const { loading, user, dispatch, notFound, repos } = useContext(GithubContext);
     const { login: userLogin } = useParams();
 
     const {
@@ -32,11 +34,22 @@ function User() {
 
       const websiteUrl = blog?.startsWith('http') ? blog : 'https://' + blog
 
-    useEffect(() => {
-        getUser(userLogin);
-        getUserRepos(userLogin);
-        // eslint-disable-next-line
-    }, [userLogin]);
+    useEffect( () => {
+        dispatch({type: 'SET_LOADING'});
+        const getAllUserData = async () => {
+            try {
+                const user = await getUser(userLogin);
+                const repos = await getUserRepos(userLogin);
+                dispatch({type: 'GET_SINGLE_USER', payload: user });
+                dispatch({type: 'GET_USER_REPOS', payload: repos });
+            } catch (error) {
+                console.log(error);
+                dispatch({type: 'NOT_FOUND'});
+            }
+        }
+        getAllUserData();
+
+    }, [dispatch, userLogin]);
 
     if(notFound) {
         return <NotFound />
