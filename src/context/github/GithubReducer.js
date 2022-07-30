@@ -16,6 +16,9 @@ const githubReducer = (state, action) => {
         notFound: false,
       };
 
+    case 'GET_USER_REPOS':
+      return { ...state, repos: action.payload, loading: false };
+
     case 'SET_LOADING':
       return { ...state, loading: true };
 
@@ -23,7 +26,7 @@ const githubReducer = (state, action) => {
       return { ...state, users: [] };
 
     case 'CLEAR_SINGLE_USER':
-      return { ...state, user: {} };
+      return { ...state, user: {}, repos: [] };
 
     case 'NOT_FOUND':
       return { ...state, loading: false, notFound: true };

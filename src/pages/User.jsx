@@ -4,12 +4,13 @@ import GithubContext from '../context/github/GithubContext';
 
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
 
+import RepoList from '../components/repos/RepoList';
 import Spinner from '../components/layout/Spinner';
 import NotFound from './NotFound';
 
 function User() {
 
-    const { loading, getUser, notFound, user } = useContext(GithubContext);
+    const { loading, getUser, user, notFound, getUserRepos, repos } = useContext(GithubContext);
     const { login: userLogin } = useParams();
 
     const {
@@ -33,6 +34,7 @@ function User() {
 
     useEffect(() => {
         getUser(userLogin);
+        getUserRepos(userLogin);
         // eslint-disable-next-line
     }, [userLogin]);
 
@@ -166,6 +168,8 @@ function User() {
                   </div>
                 </div>
               </div>
+
+              <RepoList repos={repos}/>
             </div>
           </>
         )
