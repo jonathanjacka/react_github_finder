@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Github Finder REACT/TAILWINDCSS/DAISY ui
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Client-side UI using REACT, with TailwindCSS and Daisy UI for styling.  This project was inspired from this [course](https://www.udemy.com/course/react-front-to-back-2022/) by Brad Traversy - 100% would recommend!  The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Note:
 
