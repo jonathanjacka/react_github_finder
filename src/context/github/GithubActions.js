@@ -1,5 +1,4 @@
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 //Get search results
 export const searchUsers = async (text) => {
@@ -7,11 +6,7 @@ export const searchUsers = async (text) => {
     q: text,
   });
 
-  const res = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-    headers: {
-      Authorization: `token ${GITHUB_TOKEN}`,
-    },
-  });
+  const res = await fetch(`${GITHUB_URL}/search/users?${params}`);
 
   const { items } = await res.json();
 
@@ -20,11 +15,7 @@ export const searchUsers = async (text) => {
 
 //get single user
 export const getUser = async (login) => {
-  const res = await fetch(`${GITHUB_URL}/users/${login}`, {
-    headers: {
-      Authorization: `token ${GITHUB_TOKEN}`,
-    },
-  });
+  const res = await fetch(`${GITHUB_URL}/users/${login}`);
 
   if (res.status === 404) {
     throw new Error('User not found - check to see if username is correct');
@@ -42,11 +33,7 @@ export const getUserRepos = async (login) => {
     per_page: 10,
   });
 
-  const res = await fetch(`${GITHUB_URL}/search/repositories?${params}`, {
-    headers: {
-      Authorization: `token ${GITHUB_TOKEN}`,
-    },
-  });
+  const res = await fetch(`${GITHUB_URL}/search/repositories?${params}`);
 
   const { items: data } = await res.json();
 
